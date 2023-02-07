@@ -15,7 +15,7 @@ struct URLSessionHTTPClient: HTTPClient {
 
     // MARK: - Initialization
 
-    init(urlSession: URLSession = .shared) {
+    init(urlSession: URLSession = newURLSession()) {
         self.urlSession = urlSession
     }
 
@@ -57,6 +57,13 @@ struct URLSessionHTTPClient: HTTPClient {
         return DispatchQueue.global()
     }
 
+    private static func newURLSession() -> URLSession {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 10 * 60
+        config.timeoutIntervalForResource = 10 * 60
+        return URLSession(configuration: config)
+    }
+
     // MARK: - Inner Types
 
     class URLSessionError: NestedError<Error>, HTTPClientError { }
@@ -75,6 +82,7 @@ extension HTTPRequest {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
         request.httpBody = body
+        request.timeoutInterval = 10 * 60
 
         return request
     }
