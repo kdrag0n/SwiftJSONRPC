@@ -65,12 +65,12 @@ open class NestedError<T>: Error {
 extension NestedError: CustomStringConvertible, CustomDebugStringConvertible {
 // MARK: - Properties
 
-    open var description: String {
+    public var description: String {
         let cause = (self.cause != nil) ? String(describing: self.cause!) : "nil"
         return "\(type(of: self))(cause: \(cause))"
     }
 
-    open var debugDescription: String {
+    public var debugDescription: String {
         return self.description
     }
 
