@@ -7,6 +7,8 @@
 
 import Foundation
 
+fileprivate let requestTimeout: TimeInterval = 60 * 60
+
 struct URLSessionHTTPClient: HTTPClient {
 
     // MARK: - Private Properties
@@ -59,8 +61,8 @@ struct URLSessionHTTPClient: HTTPClient {
 
     private static func newURLSession() -> URLSession {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 10 * 60
-        config.timeoutIntervalForResource = 10 * 60
+        config.timeoutIntervalForRequest = requestTimeout
+        config.timeoutIntervalForResource = requestTimeout
         return URLSession(configuration: config)
     }
 
@@ -82,7 +84,7 @@ extension HTTPRequest {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
         request.httpBody = body
-        request.timeoutInterval = 10 * 60
+        request.timeoutInterval = requestTimeout
 
         return request
     }
