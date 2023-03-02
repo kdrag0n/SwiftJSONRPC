@@ -6,6 +6,8 @@
 //
 // ----------------------------------------------------------------------------
 
+import Foundation
+
 public struct HTTPRequestExecutorError: RequestExecutorError {
 // MARK: - Construction
 
@@ -47,7 +49,7 @@ public struct HTTPRequestExecutorError: RequestExecutorError {
 
 // ----------------------------------------------------------------------------
 
-open class NestedError<T>: Error {
+open class NestedError<T: Error>: LocalizedError {
 // MARK: - Construction
 
     public init(cause: T?) {
@@ -57,7 +59,10 @@ open class NestedError<T>: Error {
 // MARK: - Properties
 
     public let cause: T?
-
+    
+    public var errorDescription: String? {
+        cause?.localizedDescription
+    }
 }
 
 // ----------------------------------------------------------------------------

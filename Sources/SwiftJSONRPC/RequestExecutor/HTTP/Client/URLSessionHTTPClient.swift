@@ -7,9 +7,9 @@
 
 import Foundation
 
-fileprivate let requestTimeout: TimeInterval = 60 * 60
+private let requestTimeout: TimeInterval = 60 * 60
 
-struct URLSessionHTTPClient: HTTPClient {
+public struct URLSessionHTTPClient: HTTPClient {
 
     // MARK: - Private Properties
 
@@ -68,9 +68,9 @@ struct URLSessionHTTPClient: HTTPClient {
 
     // MARK: - Inner Types
 
-    class URLSessionError: NestedError<Error>, HTTPClientError { }
-    class NoResponseError: HTTPClientError { }
-    class NoResponseDataError: HTTPClientError { }
+    public class URLSessionError: NestedError<Error>, HTTPClientError { }
+    public class NoResponseError: HTTPClientError { }
+    public class NoResponseDataError: HTTPClientError { }
 
 }
 
