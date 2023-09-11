@@ -16,7 +16,7 @@ public class Response {
 
     // MARK: - Initialization
 
-    init(response: Any) throws {
+    public init(response: Any) throws {
         guard let json = (response as? [String: AnyObject]),
               let version = (json[JsonKeys.JsonRPC] as? String), (version == RPCClient.Version),
               let id = (json[JsonKeys.Id] as? String)
